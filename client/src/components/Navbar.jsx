@@ -37,6 +37,7 @@ const Navbar = () => {
             data.success && setIsLoggedin(false)
             data.success && setUserData(false)
             navigate('/')
+            toast.success(data.message)
         }
         catch (error) {
             toast.error(error.message)
