@@ -18,7 +18,7 @@ function Header() {
             <img className='w-8 aspect-square' src={assets.hand_wave} alt='' />
         </h1>
         <h2 className='text-3xl sm:text-5xl font-semibold mb-4'>Welcome To Our SWOT FICTION Academy</h2>
-        <p className='mb-8 max-w-md text-xl'>Let's Start & Grow Yourself With Our Mentors. <br/> We provide a Best Mentor & Coach for Your Child</p>
+        <p className='mb-8 max-w-md text-xl'>Let's Start & Grow Yourself With Our Mentors. <br/> We Provide A Best Mentor & Coach For Your Child</p>
         <button className='border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all'>Get Started</button>
     </div>  
   )
