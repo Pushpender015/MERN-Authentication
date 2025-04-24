@@ -49,11 +49,11 @@ export const register = async (req , res) => {
             }
         );
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'Production',
-            sameSite: process.env.NODE_ENV === 'Production' ? 'none' : 'strict',
-            maxAge: 7 * 24 * 160 * 60 * 1000    // 7 days
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production", // ✔️ auto true on Vercel
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ✔️ lax for local, none for vercel
+          maxAge: 7 * 24 * 60 * 60 * 1000, // ✔️ 7 days
         });
 
         // sending welcome email
@@ -138,13 +138,12 @@ export const login = async (req , res) => {
             }
         );
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'Production',
-            sameSite: process.env.NODE_ENV === 'Production' ? 'none' : 'strict',
-            maxAge: 7 * 24 * 160 * 60 * 1000    // 7 days
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production", // ✔️ auto true on Vercel
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ✔️ lax for local, none for vercel
+          maxAge: 7 * 24 * 60 * 60 * 1000, // ✔️ 7 days
         });
-
         // finally 
         return res.json({
             success: true,
@@ -298,13 +297,14 @@ export const verifyEmail = async (req , res) => {
             from: process.env.SENDER_EMAIL,
             to: user.email,
                 subject: 'Your Account Verified Successfully.',
-                // text: `<h2>Account Verified</h2> <br>
-                //         <p>Hey ${user.name} <br>
-                //         your account has been successfully verified. <br>
-                //         Now you can access every lectures in this website.
-                //         </p>
-                //         `,
-                html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}" , OTP).replace("{{email}}" , user.email)
+                text: `<h2>Account Verified</h2> <br>
+                        <p>Hey ${user.name} <br>
+                        your account has been successfully verified. <br>
+                        Now you can access every lectures on our SWOT FICTION Academy.
+                        </p> <br>
+                        <b>Best Regards,</b>
+                        <b>Pushpender Singh</b>
+                        `
         }
         await transporter.sendMail(mailOption);
 
@@ -381,13 +381,14 @@ export const sendPasswordResetOTP = async (req , res) => {
             from: process.env.SENDER_EMAIL,
             to: user.email,
                 subject: 'password Reset OTP',
-                text: `<h2>Confirm verification code</h2> <br>
-                        <p>Hey ${user.name} <br>
-                        Please enter the following code on the page where you dropped your login Credentials for reset your password: <br> 
-                        <h1>${OTP}</h1> <br>
-                        This verification code will only be valid for the next <b>15 minutes</b>.
-                        </p>
-                        `
+                // text: `<h2>Confirm verification code</h2> <br>
+                //         <p>Hey ${user.name} <br>
+                //         Please enter the following code on the page where you dropped your login Credentials for reset your password: <br> 
+                //         <h1>${OTP}</h1> <br>
+                //         This verification code will only be valid for the next <b>15 minutes</b>.
+                //         </p>
+                //         `,
+                html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}" , OTP).replace("{{email}}" , user.email)
         };
         await transporter.sendMail(mailOption);
 
