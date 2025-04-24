@@ -6,8 +6,13 @@ import EmailVerify from './pages/EmailVerify'
 import ResetPassword from './pages/ResetPassword'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 function App() {
+
+  axios.defaults.baseURL = "https://mern-authentication-henna.vercel.app"; // 🟢 Set to your deployed backend
+  axios.defaults.withCredentials = true; // 🔥 Required to send cookies
+  
   return (
     <>
       <ToastContainer />
