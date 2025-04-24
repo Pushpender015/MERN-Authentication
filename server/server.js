@@ -15,7 +15,7 @@ const port = process.env.PORT || 4000
 // connected db with app
 connectDB();
 
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['https://mern-authentication-xe55.vercel.app']
 
 // middlewares
 app.use(express.json());
