@@ -166,11 +166,12 @@ export const login = async (req , res) => {
 /*------- LOGOUT CONTROLLER ---------*/
 export const logout = async (req , res) => {
     try {
-        res.clearCookie('token' , {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'Production',
-            sameSite: process.env.NODE_ENV === 'Production' ? 'none' : 'strict'
-        })
+        res.clearCookie("token", {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production", // 🔥 Must be true for prod
+          sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+          path: "/", // ✅ Important: Always clear on root path
+        });
 
         return res.json({
             success: true,
